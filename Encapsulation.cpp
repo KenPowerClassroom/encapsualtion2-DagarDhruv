@@ -76,12 +76,21 @@ private:
 public:
     Book(const std::string& title) : title(title), isAvailable(true) {}
 
-    bool checkAvailability() const {
+    bool isAvailableToBorrow() const {
         return isAvailable;
     }
 
-    void borrowBook() {
-        isAvailable = false;
+    void borrowbook()
+    {
+        if (isAvailable)
+        {
+            isAvailable = false;
+            std::cout << "book borrowed successfully" << std::endl;
+        }
+        else
+        {
+            std::cout << "book not available to borrow" << std::endl;
+        }
     }
 
     void returnBook() {
@@ -92,14 +101,7 @@ public:
 class Library {
 public:
     void processBookBorrowing(Book& book) {
-        // Violates Tell, Don't Ask
-        if (book.checkAvailability()) {
-            book.borrowBook();
-            std::cout << "Book borrowed successfully." << std::endl;
-        }
-        else {
-            std::cout << "Book is not available for borrowing." << std::endl;
-        }
+        book.borrowbook();
     }
 };
 
@@ -148,7 +150,6 @@ int main() {
     // Exercise 1
     //////////////////////////////////////////////////////////////////
  
-    BankAccount account(1000.0);
     BankAccount account(1000.0);
     account.checkAndWithdraw(500);
 
