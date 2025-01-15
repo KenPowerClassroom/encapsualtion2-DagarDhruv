@@ -47,12 +47,22 @@ public:
 class Thermostat {
 private:
     double currentTemperature;
+    HeatingSystem heating;
 
 public:
     Thermostat(double temperature) : currentTemperature(temperature) {}
 
     double getCurrentTemperature() const {
         return currentTemperature;
+    }
+
+    void regulateHeating() {
+        if (currentTemperature < 20.0) {
+            heating.turnOn();
+        }
+        else {
+            heating.turnOff();
+        }
     }
 };
 #include <iostream>
@@ -147,14 +157,7 @@ int main() {
     //////////////////////////////////////////////////////////////////
 
     Thermostat thermostat(18.5);
-    HeatingSystem heating;
-
-    if (thermostat.getCurrentTemperature() < 20.0) {
-        heating.turnOn();
-    }
-    else {
-        heating.turnOff();
-    }
+    thermostat.regulateHeating();
     
     //////////////////////////////////////////////////////////////////
     // Exercise 3
